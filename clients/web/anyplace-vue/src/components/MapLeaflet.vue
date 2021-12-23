@@ -18,8 +18,8 @@ import L from "leaflet";
     };
   },
   mounted() {
-    this.bindLeafletOSM(); // WAY1
-    // this.bindLeafletWithMapBox();  // WAY2
+   // this.bindLeafletOSM(); // WAY1
+     this.bindLeafletWithMapBox();  // WAY2
   },
     beforeDestroy() {
       if (this.map) {
@@ -36,10 +36,11 @@ import L from "leaflet";
     },
     bindLeafletWithMapBox: function() {
       const MAPBOX_TOKEN = process.env.VUE_APP_MAPBOX_TOKEN; // sign up: 'https://account.mapbox.com/access-tokens'
-      this.map = L.map('map').setView([51.505, -0.09], 13);
+      this.map = L.map('map').setView([37.8496184,25.2963279], 3);
       L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
+        minZoom:2.5,
         id: 'mapbox/streets-v11',
         tileSize: 512,
         zoomOffset: -1,

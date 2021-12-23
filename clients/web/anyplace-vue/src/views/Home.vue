@@ -11,89 +11,16 @@
             <div id="wrapper-menu-search" class="input-group">
               <button id="button-menu-left" class="input-group-text bg-white"><i class="fas fa-bars"></i></button>
               <!--  menu-left content: -->
-              <div id="menu-left" class="menu-off menu-appearance">
-                <div class="d-flex justify-content-between pt-3">
-                  <h3 class="fw-bold align-self-center font-monospace">Architect</h3>
-                  <button id="button-close-menu-left" class="btn-close" aria-label="Close"></button>
-                </div>
-                <hr class="pt-0 text-muted">
-                <div class="d-flex justify-content-start pt-1 d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color"><i class="fas fa-map-marker-alt me-3"></i>
-                    Your location sharing
-                  </button>
-                </div>
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color"><i class="far fa-bookmark me-3"></i>
-                    Your places
-                  </button>
-                </div>
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color"><i class="fas fa-route me-3"></i>
-                    Your timeline
-                  </button>
-                </div>
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color"><i class="far fa-star me-3"></i>
-                    Favourites
-                  </button>
-                </div>
-                <hr class="pt-0 text-muted">
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color"><i class="fas fa-link me-3"></i>
-                    Share or embed map
-                  </button>
-                </div>
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color"><i class="fas fa-print me-3"></i>
-                    Print
-                  </button>
-                </div>
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color">
-                    Edit map
-                  </button>
-                </div>
-                <hr class="pt-0 text-muted">
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color">
-                    Tips and tricks
-                  </button>
-                </div>
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color">
-                    Get help
-                  </button>
-                </div>
-                <hr class="pt-0 text-muted">
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color">
-                    Language
-                    <i class="fas fa-language"></i></button>
-                </div>
-                <div class="d-flex justify-content-start d-grid gap-2 col mx-auto">
-                  <button class="btn bg-white btn-hover-color">
-                    Maps activity
-                  </button>
-                </div>
-              </div> <!--End of content main menu-->
+
+              <menu-left> </menu-left>
 
               <!--SEARCH INPUT:-->
-              <input id="input-search" type="text" class="form-control border-sides-none d-none d-lg-block"
-                     placeholder="Search" aria-label="Search">
-              <button id="button-search" class="input-group-text bg-white">
-                <i class="fas fa-search"></i>
-              </button>
+              <search-location></search-location>
             </div>
           </div>
 
           <!-- PROFILE - MENU-->
-          <div class="profile-menu">
-            <button class="btn btn-secondary circle-icon" type="button" id="profile-button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modal-user-account">
-              <i class="fas fa-user fa-2x"></i>
-            </button>
-          </div>
+          <profile-menu></profile-menu>
         </div>
       </div>
     </div><!-- end of container-fluid-->
@@ -102,64 +29,35 @@
     <div class="container-fluid">
       <div class="row align-buttons-on-bottom">
         <div class="col">
-          <div id="wrapper-actions" class="btn-group-vertical d-none" role="group">
-            <button id="button1" class="btn mb-3 btn-light circle-icon" type="button">
-              <i class="fas fa-map-marked-alt fa-2x"></i>
-            </button>
-            <button class="btn btn-light circle-icon" type="button" id="button2">
-              <i class="fas fa-map-marker-alt fa-2x"></i>
-            </button>
-            <button class="btn btn-light mb-3 circle-icon my-2" type="button" id="button3">
-              <i class="fas fa-route fa-2x"></i>
-            </button>
-            <button class="btn btn-light circle-icon" type="button" id="button4">
-              <i class="fas fa-directions fa-2x"></i>
-            </button>
-          </div>
-          <div class="d-flex justify-content-end my-2">
-            <button id="button-toggle-actions" class="btn btn-primary circle-icon" type="button">
-              <i class="fas fa-angle-double-up fa-2x"></i>
-            </button>
-          </div>
+            <bottom-right></bottom-right>
         </div>
       </div>
     </div>  <!-- end of container-fluid -->
 
     <!-- MODALS -->
     <!-- PROFILE-MODAL -->
-    <div class="modal-user-profile modal fade right" id="modal-user-account" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <i class="fas fa-user fa-2x pe-3"></i>
-            <h5 class="modal-title" id="exampleModalLabel">Alan Turing</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <button class="dropdown-item" type="button">Profile</button>
-            <a href="settings" class="dropdown-item" type="button">Settings</a>
-          </div>
-          <div class="modal-footer">
-            <a href="about" class="dropdown-item" type="button">About</a>
-            <button class="dropdown-item" type="button">Terms of Service</button>
-            <button class="dropdown-item" type="button">Privacy</button>
-            <small class="text-muted mx-auto" style="font-size: 8px">Anyplace &copy; 2021</small>
-          </div>
-        </div>
-      </div>
-    </div>
+    <modal-right> </modal-right>
 
   </div>
 </template>
 
 <script lang="ts">
 import {Options, Vue} from 'vue-class-component';
-import MapLeaflet from "@/components/MapLeaflet.vue"; // @ is an alias to /src
+import MapLeaflet from "@/components/MapLeaflet.vue";
+import MenuLeft from "@/components/menu-left.vue";
+import SearchLocation from "@/components/search-location.vue";
+import ProfileMenu from "@/components/profile-menu.vue";
+import BottomRight from "@/components/bottom-right.vue";
+import ModalRight from "@/components/modal-right.vue"; // @ is an alias to /src
 
 @Options({
   name: "Anyplace",
   components: {
+    ModalRight,
+    BottomRight,
+    ProfileMenu,
+    SearchLocation,
+    MenuLeft,
     MapLeaflet,
   },
   mounted() {
