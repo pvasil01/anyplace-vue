@@ -1,6 +1,8 @@
 <template>
+
   <div class="home">
-    <MapLeaflet/>
+
+    <map-leaflet :places="places"></map-leaflet>
     <div class="container-fluid">
       <!-- TOP ROW: button-menu-left, search-box, profile-menu -->
       <div class="row">
@@ -15,15 +17,22 @@
               <menu-left> </menu-left>
 
               <!--SEARCH INPUT:-->
-              <search-location></search-location>
+              <search-location :places="places"></search-location>
+
+
+
             </div>
           </div>
 
           <!-- PROFILE - MENU-->
           <profile-menu></profile-menu>
+
         </div>
+
       </div>
+
     </div><!-- end of container-fluid-->
+
 
     <!--   ALIGN-BUTTONS-ON-BOTTOM : align circle buttons on right-end of page -->
     <div class="container-fluid">
@@ -48,7 +57,9 @@ import MenuLeft from "@/components/menu-left.vue";
 import SearchLocation from "@/components/search-location.vue";
 import ProfileMenu from "@/components/profile-menu.vue";
 import BottomRight from "@/components/bottom-right.vue";
-import ModalRight from "@/components/modal-right.vue"; // @ is an alias to /src
+import ModalRight from "@/components/modal-right.vue";
+import axios from "axios"; // @ is an alias to /src
+//import {SCREEN_SIZE_MEDIUM} from "@/main.ts";
 
 @Options({
   name: "Anyplace",
@@ -60,12 +71,24 @@ import ModalRight from "@/components/modal-right.vue"; // @ is an alias to /src
     MenuLeft,
     MapLeaflet,
   },
-  mounted() {
-        enableUiWithoutVue() // TODO break it up and do it with vue
-  },
   data() {
-        return { }
+    return {
+      places: null
+    }
   },
+  mounted() {
+
+       // enableUiWithoutVue() // TODO break it up and do it with vue
+    axios
+        .post('https://ap.cs.ucy.ac.cy:44/api/mapping/space/public',{})
+      //   .then(data=>console.log(data.data.spaces))
+        .then(data=> (this.places=data.data.spaces))
+
+
+        .catch(err=>console.log(err))
+
+  },
+
   methods: {
   }
 })
@@ -76,7 +99,10 @@ export default class Home extends Vue { }
 function enableUiWithoutVue(): void {
   console.log("enableUiWithoutVue")
 
-  const SCREEN_SIZE_MEDIUM = 1007
+
+
+//  const SCREEN_SIZE_MEDIUM = 1007
+  //const SCREEN_SIZE_MEDIUM=process.env.VUE_APP_SCREEN_SIZE_MEDIUM
 
   // UNIQUE ELEMENTS:
   /** search box. on mobile is hidden when not in use. */
@@ -102,6 +128,8 @@ function enableUiWithoutVue(): void {
   /** Toggles the bottom-right action buttons */
   const elButtonToggleActions: HTMLButtonElement = document.getElementById('button-toggle-actions') as HTMLButtonElement
 
+/*
+
   function isScreenMediumOrSmall() {
     return document.body.clientWidth < SCREEN_SIZE_MEDIUM
   }
@@ -117,15 +145,21 @@ function enableUiWithoutVue(): void {
   function hideInputSearchOnMobile() {
     return elInputSearch.classList.add("d-none")
   }
+*/
+
 
   // SEARCH: on enter
-  elInputSearch.addEventListener("keyup", function (event) {
-    if (event.key === 'Enter') {
-      trySearch()
-    }
-  });
 
-  /** SEARCH: on {@link elButtonSearch} press */
+  //elInputSearch.addEventListener("keyup", function (event) {
+   // if (event.key === 'Enter') {
+   //   trySearch()
+  //  }
+  //});
+
+
+  // /!* SEARCH: on {@link elButtonSearch} press *!/
+
+/*
   elButtonSearch.addEventListener("click", function () {
     if (isScreenMediumOrSmall()) {
       if (isHiddenInputSearchOnMobile()) {
@@ -139,8 +173,11 @@ function enableUiWithoutVue(): void {
       trySearch();
     }
   });
+*/
+
 
   // TOGGLE LEFT MENU (app-specific menu)
+
   elButtonOpenMenuLeft.addEventListener("click", function (event) {
     elMenuLeft.style.display = "block";
   });
@@ -154,12 +191,14 @@ function enableUiWithoutVue(): void {
    * - {@link elInputSearch}
    * - {@link elButtonSearch }
    */
+/*
   elWrapperMenuAndSearch.addEventListener('focusout', (function (event) {
     // when the event concerns any other object than the child of the wrapper
     if (!this.contains((event.relatedTarget) as HTMLElement)) {
       hideInputSearchOnMobile()
     }
   }));
+*/
 
   /** If {@link elInputSearch } has any text, then perform a query. */
   function trySearch() {

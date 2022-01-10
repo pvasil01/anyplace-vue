@@ -1,5 +1,10 @@
 <template>
   <div id="map"></div>
+
+<!--
+  <building v-for="building in places" :key="building" ></building>
+-->
+
 </template>
 
 <script lang="ts">
@@ -7,20 +12,26 @@ import { Options, Vue } from 'vue-class-component';
 
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import building from "@/components/building.vue";
+import Building from "@/components/building.vue";
 
 @Options({
+  components: {Building},
   props: {
-    msg: String
+    msg: String,
+    places: Array,
   },
   data() {
     return {
       map: null
     };
   },
+
   mounted() {
    // this.bindLeafletOSM(); // WAY1
      this.bindLeafletWithMapBox();  // WAY2
   },
+
     beforeDestroy() {
       if (this.map) {
         this.map.remove();
@@ -46,8 +57,19 @@ import L from "leaflet";
         zoomOffset: -1,
         accessToken: MAPBOX_TOKEN
       }).addTo(this.map);
+      var marker = L.marker([51.5, -0.09]).addTo(this.map);
+      marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+      /*  for (let i=0; i<this.places.length; i++) {
+          var marker = L.marker([this.places[i].coordinates_lat, this.places[i].coordinates_lon]).addTo(this.map);
+
+        }*/
+
+
+
     }
-  }
+  },
+
 })
 
 export default class MapLeaflet extends Vue {
